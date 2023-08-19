@@ -45,7 +45,6 @@ Enter the path to the banned wordlist file (leave blank for default):
 
 Enter a password: password123
 Too short: Password should be at least 12 characters long.
-Suggested strong password: 8aB#2d$9f!Z
 
 Enter a password: securePassword123!
 Strong: Password meets all the requirements. Score: 4/4
