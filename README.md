@@ -64,4 +64,4 @@ Shubham Sharma - [My LinkedIn](https://www.linkedin.com/in/sharma-it/) - shubham
 
 # License
 
-This project is licensed under the GPL 3.0 License - see the [LICENSE](LICENCE) file for details.
+This project is licensed under the GPL 3.0 License - see the [LICENSE](LICENSE) file for details.
