@@ -16,10 +16,12 @@ class Wordlist:
                 wordlist = [line.strip() for line in file]
                 self._cache[self.file_path] = wordlist
                 return wordlist
-        except FileNotFoundError:
-            raise FileNotFoundError(f"Error: File '{self.file_path}' not found.")
+        except FileNotFoundError as e:
+            raise FileNotFoundError(f"Error: File '{self.file_path}' not found.") from e
         except Exception as e:
-            raise Exception(f"Error loading wordlist from '{self.file_path}': {str(e)}")
+            raise RuntimeError(
+                f"Error loading wordlist from '{self.file_path}': {str(e)}"
+            ) from e
 
     def is_word_in_list(self, word):
         return word in self.words
@@ -57,11 +59,10 @@ class PasswordStrength:
         password_strength = zxcvbn(password)
         score = password_strength["score"]
 
-        if score < 3:
-            suggestions = password_strength["feedback"]["suggestions"]
-            return StrengthResult("Weak", score, f"Password is weak. Suggestions: {', '.join(suggestions)}")
-        else:
+        if score >= 3:
             return StrengthResult("Strong", score, f"Password meets all the requirements. Score: {score}/4")
+        suggestions = password_strength["feedback"]["suggestions"]
+        return StrengthResult("Weak", score, f"Password is weak. Suggestions: {', '.join(suggestions)}")
 
 if __name__ == '__main__':
     while True:
@@ -87,7 +88,7 @@ if __name__ == '__main__':
         for _ in range(num_passwords):
             password = input("Enter a password: ")
             result = password_strength_checker.check_password_strength(password)
-            print(result.strength + ": " + result.message)
+            print(f"{result.strength}: {result.message}")
 
             if result.strength == "Weak":
                 print("Suggested strong password:", password_strength_checker.generate_random_password())
