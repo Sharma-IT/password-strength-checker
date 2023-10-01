@@ -2,18 +2,18 @@
 
 This is a Python script that allows you to check the strength of passwords. It uses the zxcvbn library to evaluate the strength of passwords based on factors such as length, complexity, and common usage.
 
-# Features
+## Features
 
 * Check the strength of a password and provide a score and feedback message.
 * Option to use custom wordlists for checking weak and banned passwords.
 * Simple command-line interface for easy interaction.
 
-# Requirements
+## Requirements
 
 * Python 3.x
 * zxcvbn library
 
-# Usage
+## Usage
 
 1. Clone the repository or download the script file:
 ```
@@ -54,14 +54,14 @@ Exiting the tool.
 Thank you for using the Password Strength Checker.
 ```
 
-# Contributing
+## Contributing
 
 Pull requests are welcomed. For major changes, please open an issue first to discuss what you would like to change.
 
-# Contact
+## Contact
 
 Shubham Sharma - [My LinkedIn](https://www.linkedin.com/in/sharma-it/) - shubhamsharma.emails@gmail.com.
 
-# License
+## License
 
 This project is licensed under the GPL 3.0 License - see the [LICENSE](LICENSE) file for details.
