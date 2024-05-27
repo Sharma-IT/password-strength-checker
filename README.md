@@ -52,7 +52,8 @@ python password_strength_checker.py.
 
 **NOTE:** To exit the tool, enter 0 when prompted for the number of passwords to test.
 
-Example:
+### Example Output
+
 ```
 $ python password_strength_checker.py
 Enter the number of passwords to test (enter 0 to exit): 2
