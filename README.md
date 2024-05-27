@@ -39,7 +39,7 @@ cd Password-Strength-Checker
 3. Install the `zxcvbn` library:
 
 ```
-pip install zxcvbn
+pip3 install zxcvbn
 ```
 
 4. Run the script:
