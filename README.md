@@ -1,6 +1,6 @@
 # Password Strength Checker
 
-This is a Python script that allows you to check the strength of passwords. It uses the zxcvbn library to evaluate the strength of passwords based on factors such as length, complexity, and common usage.
+This is a Python script that allows you to check the strength of passwords. It uses the `zxcvbn` library to evaluate the strength of passwords based on factors such as length, complexity, and common usage.
 
 ## Table of Contents
 
