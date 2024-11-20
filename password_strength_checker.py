@@ -1,3 +1,12 @@
+"""A GUI application for checking and generating secure passwords.
+
+This module provides functionality to:
+- Check password strength using various criteria
+- Generate secure random passwords
+- Suggest improvements for weak passwords
+- Export password check results
+"""
+
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import re
