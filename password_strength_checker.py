@@ -1,5 +1,3 @@
-"""Password Strength Checker module."""
-
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import re
@@ -180,6 +178,14 @@ class PasswordStrengthGUI:
             fg="light blue", justify="left")
         self.tip_label.pack()
 
+        # Added text box to display generated password
+        self.password_display = tk.Text(master, height=2, width=30, wrap=tk.WORD)
+        self.password_display.pack()
+
+        # Added Copy to Clipboard Button
+        self.copy_button = tk.Button(master, text="Copy to Clipboard", command=self.copy_password)
+        self.copy_button.pack()
+
         self.results = []
 
     def check_password(self):
@@ -198,6 +204,11 @@ class PasswordStrengthGUI:
         password = self.password_strength.generate_random_password()
         self.password_entry.delete(0, tk.END)
         self.password_entry.insert(0, password)
+        
+        # Insert the generated password into the text box
+        self.password_display.delete(1.0, tk.END)
+        self.password_display.insert(tk.END, password)
+        
         copy_to_clipboard = messagebox.askyesno("Generated Password",
             f"Generated password: {password}\n\n"
             "Do you want to copy the password to clipboard?")
@@ -206,19 +217,27 @@ class PasswordStrengthGUI:
             self.master.clipboard_append(password)
             messagebox.showinfo("Clipboard", "Password copied to clipboard.")
 
+    def copy_password(self):
+        """Copy the password from the text box to clipboard."""
+        password = self.password_display.get(1.0, tk.END).strip()
+        self.master.clipboard_clear()
+        self.master.clipboard_append(password)
+        messagebox.showinfo("Clipboard", "Password copied to clipboard.")
+
     def export_results(self):
         """Export the password check results to a JSON file."""
         if not self.results:
-            messagebox.showwarning("No Results", "No passwords have been checked yet.")
+            messagebox.showerror("Error", "No results to export.")
             return
+        file_path = filedialog.asksaveasfilename(defaultextension=".json",
+            filetypes=[("JSON files", "*.json"), ("All files", "*.*")])
+        if not file_path:
+            return
+        with open(file_path, 'w', encoding='utf-8') as file:
+            json.dump(self.results, file, indent=4)
+        messagebox.showinfo("Export Successful", f"Results exported to {file_path}.")
 
-        file_path = filedialog.asksaveasfilename(defaultextension=".json")
-        if file_path:
-            with open(file_path, 'w', encoding='utf-8') as f:
-                json.dump(self.results, f, indent=2)
-            messagebox.showinfo("Export Successful", f"Results exported to {file_path}")
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     root = tk.Tk()
-    gui = PasswordStrengthGUI(root)
+    password_checker_gui = PasswordStrengthGUI(root)
     root.mainloop()

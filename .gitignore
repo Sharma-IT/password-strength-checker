@@ -1,0 +1,49 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Log files
+*.log
+
+# Virtual environment
+venv/
+.env/
+.venv/
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+*.wheel
+
+# PyInstaller
+#  Usually these files are written by a python script from a PyInstaller setup
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+coverage/
+*.cover
+*.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.coveragerc
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Application files
+password_checker.log
+
+# Workflow files (if unnecessary to version control)
+.github/workflows/*.yml
