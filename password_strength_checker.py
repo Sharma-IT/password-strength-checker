@@ -308,7 +308,7 @@ def main():
                     print("Invalid choice. Please try again.")
     else:
         root = tk.Tk()
-        password_checker_gui = PasswordStrengthGUI(root)
+        PasswordStrengthGUI(root)
         root.mainloop()
 
 if __name__ == "__main__":
