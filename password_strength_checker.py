@@ -1,10 +1,11 @@
-"""A GUI application for checking and generating secure passwords.
+"""A GUI and CLI application for checking and generating secure passwords.
 
 This module provides functionality to:
 - Check password strength using various criteria
 - Generate secure random passwords
 - Suggest improvements for weak passwords
 - Export password check results
+Supports both GUI and CLI interfaces
 """
 
 import tkinter as tk
@@ -14,6 +15,8 @@ import random
 import string
 import logging
 import json
+import argparse
+import sys
 from functools import lru_cache
 
 from zxcvbn import zxcvbn
@@ -243,7 +246,70 @@ class PasswordStrengthGUI:
             json.dump(self.results, file, indent=4)
         messagebox.showinfo("Export Successful", f"Results exported to {file_path}.")
 
+class PasswordStrengthCLI:
+    """CLI interface for Password Strength Checker."""
+
+    def __init__(self):
+        self.password_strength = PasswordStrength()
+
+    def check_password(self, password):
+        """Check password strength and print results."""
+        result = self.password_strength.check_password_strength(password)
+        print(f"\nStrength: {result.strength}")
+        print(f"Message: {result.message}")
+        print(self.password_strength.suggest_improvements(password))
+
+    def generate_password(self, length=16):
+        """Generate and display a random password."""
+        password = self.password_strength.generate_random_password(length)
+        print(f"\nGenerated Password: {password}")
+        self.check_password(password)
+        return password
+
+def main():
+    """Main entry point for both GUI and CLI interfaces."""
+    parser = argparse.ArgumentParser(description="Password Strength Checker")
+    parser.add_argument("--cli", action="store_true", help="Run in CLI mode")
+    parser.add_argument("--check", type=str, help="Check strength of provided password")
+    parser.add_argument("--generate", action="store_true", help="Generate a strong password")
+    parser.add_argument("--length", type=int, default=16, help="Length of generated password")
+
+    args = parser.parse_args()
+
+    if args.cli or args.check or args.generate:
+        cli = PasswordStrengthCLI()
+        if args.check:
+            cli.check_password(args.check)
+        elif args.generate:
+            cli.generate_password(args.length)
+        elif args.cli:
+            while True:
+                print("\nPassword Strength Checker CLI")
+                print("1. Check Password Strength")
+                print("2. Generate Strong Password")
+                print("3. Exit")
+                choice = input("\nEnter your choice (1-3): ")
+
+                if choice == "1":
+                    password = input("Enter password to check: ")
+                    cli.check_password(password)
+                elif choice == "2":
+                    length = input("Enter desired password length (default 16): ")
+                    try:
+                        length = int(length) if length else 16
+                        cli.generate_password(length)
+                    except ValueError:
+                        print("Invalid length. Using default length of 16.")
+                        cli.generate_password()
+                elif choice == "3":
+                    print("Goodbye!")
+                    sys.exit(0)
+                else:
+                    print("Invalid choice. Please try again.")
+    else:
+        root = tk.Tk()
+        password_checker_gui = PasswordStrengthGUI(root)
+        root.mainloop()
+
 if __name__ == "__main__":
-    root = tk.Tk()
-    password_checker_gui = PasswordStrengthGUI(root)
-    root.mainloop()
+    main()
