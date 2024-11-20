@@ -213,11 +213,9 @@ class PasswordStrengthGUI:
         password = self.password_strength.generate_random_password()
         self.password_entry.delete(0, tk.END)
         self.password_entry.insert(0, password)
-        
         # Insert the generated password into the text box
         self.password_display.delete(1.0, tk.END)
         self.password_display.insert(tk.END, password)
-        
         copy_to_clipboard = messagebox.askyesno("Generated Password",
             f"Generated password: {password}\n\nDo you want to copy the password to clipboard?")
         if copy_to_clipboard:
