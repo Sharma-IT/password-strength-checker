@@ -1,83 +1,127 @@
 # Password Strength Checker
 
-This is a Python script that allows you to check the strength of passwords. It uses the `zxcvbn` library to evaluate the strength of passwords based on factors such as length, complexity, and common usage.
-
-## Table of Contents
-
-1. [Features](#features)
-2. [Requirements](#requirements)
-3. [Usage](#usage)
-4. [Contributing](#contributing)
-5. [Contact](#contact)
-6. [License](#license)
+A comprehensive password strength checking tool with both GUI and CLI interfaces. This application helps users create and validate secure passwords using advanced strength checking algorithms.
 
 ## Features
 
-* Check the strength of a password and provide a score and feedback message.
-* Option to use custom wordlists for checking weak and banned passwords.
-* Simple command-line interface for easy interaction.
+- **Dual Interface**: Choose between a user-friendly GUI or efficient CLI
+- **Password Strength Analysis**: Uses the `zxcvbn` algorithm for realistic password strength assessment
+- **Password Generation**: Create strong, random passwords of customisable length
+- **Comprehensive Checks**:
+  - Minimum length requirements
+  - Character complexity (uppercase, lowercase, numbers, special characters)
+  - Common password detection
+  - Banned password detection
+- **Improvement Suggestions**: Get specific recommendations to strengthen weak passwords
+- **Export Functionality**: Save password check results to JSON (GUI mode)
+- **Logging**: Track password checks with detailed logs
 
-## Requirements
+## Installation
 
-* Python 3.x
-* `zxcvbn` library
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/password-strength-checker.git
+cd password-strength-checker
+```
+
+2. Install dependencies:
+```bash
+pip install zxcvbn
+```
+
+3. Ensure you have the required wordlist files:
+- `weak_passwords.txt`: List of commonly used weak passwords
+- `banned_passwords.txt`: List of banned passwords
 
 ## Usage
 
-1. Clone the repository:
+### GUI Mode
 
-```sh
-git clone https://github.com/Sharma-IT/Password-Strength-Checker.git
+Run without arguments to launch the graphical interface:
+```bash
+python password_strength_checker.py
 ```
 
-2. Change into directory:
+### CLI Mode
 
-```sh
-cd Password-Strength-Checker
+1. Interactive CLI:
+```bash
+python password_strength_checker.py --cli
 ```
 
-3. Install the `zxcvbn` library:
-
-```
-pip3 install zxcvbn
-```
-
-4. Run the script:
-
-```
-python password_strength_checker.py.
+2. Direct password check:
+```bash
+python password_strength_checker.py --check "your_password_here"
 ```
 
-5. Follow the prompts to enter the number of passwords to test, the path to the weak wordlist file (optional), and the path to the banned wordlist file (optional). Enter the passwords to test when prompted.
+3. Generate password:
+```bash
+# Default length (16 characters)
+python password_strength_checker.py --generate
 
-**NOTE:** To exit the tool, enter 0 when prompted for the number of passwords to test.
-
-### Example Output
-
+# Custom length
+python password_strength_checker.py --generate --length 20
 ```
-$ python password_strength_checker.py
-Enter the number of passwords to test (enter 0 to exit): 2
-Enter the path to the weak wordlist file (leave blank for default):  
-Enter the path to the banned wordlist file (leave blank for default):
 
-Enter a password: password123
-Too short: Password should be at least 12 characters long.
+### Command Line Arguments
 
-Enter a password: securePassword123!
-Strong: Password meets all the requirements. Score: 4/4
+- `--cli`: Launch interactive CLI mode
+- `--check PASSWORD`: Check strength of a specific password
+- `--generate`: Generate a strong password
+- `--length N`: Specify length for generated password (default: 16)
 
-Enter the number of passwords to test (enter 0 to exit): 0
-Exiting the tool.
-Thank you for using the Password Strength Checker.
-```
+## Features in Detail
+
+### Password Strength Criteria
+
+- Minimum length: 12 characters
+- Character complexity:
+  - Uppercase letters
+  - Lowercase letters
+  - Numbers
+  - Special characters
+- Checks against common weak passwords
+- Checks against banned passwords
+- Uses zxcvbn for advanced pattern matching
+
+### GUI Features
+
+- Password strength visualisation
+- Password generation with clipboard support
+- Export results to JSON
+- Security tips display
+- Interactive feedback
+
+### CLI Features
+
+- Interactive menu-driven interface
+- Direct command execution
+- Password generation with customisable length
+- Detailed strength analysis output
+
+## Logging
+
+The application logs all password checks to `password_checker.log` with the following information:
+- Timestamp
+- Action performed
+- Strength result
+
+## Security Notes
+
+- Passwords are never stored permanently
+- All processing is done locally
+- No external API calls for password checking
+- Secure random generation for new passwords
+
+## Dependencies
+
+- Python 3.x
+- tkinter (included in standard Python distribution)
+- zxcvbn
 
 ## Contributing
 
-Pull requests are welcomed. For major changes, please open an issue first to discuss what you would like to change.
-
-## Contact
-
-Shubham Sharma - [My LinkedIn](https://www.linkedin.com/in/sharma-it/) - shubhamsharma.emails@gmail.com.
+Feel free to submit issues, fork the repository, and create pull requests for any improvements.
 
 ## License
 
