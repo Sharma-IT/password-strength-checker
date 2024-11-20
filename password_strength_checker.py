@@ -219,8 +219,7 @@ class PasswordStrengthGUI:
         self.password_display.insert(tk.END, password)
         
         copy_to_clipboard = messagebox.askyesno("Generated Password",
-            f"Generated password: {password}\n\n"
-            "Do you want to copy the password to clipboard?")
+            f"Generated password: {password}\n\nDo you want to copy the password to clipboard?")
         if copy_to_clipboard:
             self.master.clipboard_clear()
             self.master.clipboard_append(password)
